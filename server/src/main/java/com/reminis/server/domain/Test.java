@@ -1,4 +1,4 @@
-package com.reminis.system.domain;
+package com.reminis.server.domain;
 
 public class Test {
 

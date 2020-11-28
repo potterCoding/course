@@ -1,4 +1,4 @@
-package com.reminis.system;
+package com.reminis.server;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
@@ -10,7 +10,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 
 @SpringBootApplication
 @EnableEurekaClient
-@MapperScan("com.reminis.system.mapper")
+@MapperScan("com.reminis.server.mapper")
 public class SystemApplication {
 
     private static final Logger LOG = LoggerFactory.getLogger(SystemApplication.class);

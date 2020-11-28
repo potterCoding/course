@@ -1,7 +1,7 @@
-package com.reminis.system.controller;
+package com.reminis.server.controller;
 
-import com.reminis.system.domain.Test;
-import com.reminis.system.service.TestService;
+import com.reminis.server.domain.Test;
+import com.reminis.server.service.TestService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

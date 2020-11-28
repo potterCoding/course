@@ -1,6 +1,6 @@
-package com.reminis.system.mapper;
+package com.reminis.server.mapper;
 
-import com.reminis.system.domain.Test;
+import com.reminis.server.domain.Test;
 
 import java.util.List;
 

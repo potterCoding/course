@@ -1,7 +1,7 @@
-package com.reminis.system.service;
+package com.reminis.server.service;
 
-import com.reminis.system.domain.Test;
-import com.reminis.system.mapper.TestMapper;
+import com.reminis.server.domain.Test;
+import com.reminis.server.mapper.TestMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
