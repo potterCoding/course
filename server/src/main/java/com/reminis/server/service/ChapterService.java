@@ -1,9 +1,11 @@
 package com.reminis.server.service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.reminis.server.domain.Chapter;
 import com.reminis.server.domain.ChapterExample;
 import com.reminis.server.dto.ChapterDto;
+import com.reminis.server.dto.PageDto;
 import com.reminis.server.mapper.ChapterMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -18,10 +20,13 @@ public class ChapterService {
     @Resource
     private ChapterMapper chapterMapper;
 
-    public List<ChapterDto> list() {
-        PageHelper.startPage(1,1);
+    public void list(PageDto pageDto) {
+        PageHelper.startPage(pageDto.getPage(),pageDto.getSize());
         ChapterExample example = new ChapterExample();
         List<Chapter> chapters = chapterMapper.selectByExample(example);
+        PageInfo<Chapter> pageInfo = new PageInfo<>(chapters);
+        pageDto.setTotal(pageInfo.getTotal());
+
         List<ChapterDto> chapterDtoList = new ArrayList<>(chapters.size());
         for (int i = 0,j = chapters.size(); i < j; i++) {
             Chapter chapter = chapters.get(i);
@@ -29,7 +34,7 @@ public class ChapterService {
             BeanUtils.copyProperties(chapter,chapterDto);
             chapterDtoList.add(chapterDto);
         }
-        return chapterDtoList;
+        pageDto.setList(chapterDtoList);
     }
 
 }
