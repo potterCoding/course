@@ -3,6 +3,7 @@ package com.reminis.business.controller.admin;
 import com.reminis.server.domain.Chapter;
 import com.reminis.server.dto.ChapterDto;
 import com.reminis.server.dto.PageDto;
+import com.reminis.server.dto.ResponseDto;
 import com.reminis.server.service.ChapterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,16 +20,30 @@ public class ChapterController {
     private ChapterService chapterService;
 
     @PostMapping("/list")
-    public PageDto list(@RequestBody PageDto pageDto) {
+    public ResponseDto list(@RequestBody PageDto pageDto) {
         LOG.info(("pagerDto: {}" + pageDto));
+        ResponseDto responseDto = new ResponseDto();
         chapterService.list(pageDto);
-        return pageDto;
+        responseDto.setContent(pageDto);
+        return responseDto;
     }
 
     @PostMapping("/save")
-    public void save(@RequestBody ChapterDto chapterDto) {
+    public ResponseDto save(@RequestBody ChapterDto chapterDto) {
         LOG.info("chapterDto: {}" + chapterDto);
+        ResponseDto responseDto = new ResponseDto();
         chapterService.save(chapterDto);
+        responseDto.setContent(chapterDto);
+        return responseDto;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseDto delete(@PathVariable String id) {
+        LOG.info("id: {}" + id);
+        ResponseDto responseDto = new ResponseDto();
+        chapterService.delete(id);
+        responseDto.setContent(id);
+        return responseDto;
     }
 
 }

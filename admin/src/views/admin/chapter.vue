@@ -31,20 +31,12 @@
                 <td class="center">{{chapter.courseId}}</td>
                 <td>
                     <div class="hidden-sm hidden-xs btn-group">
-                        <button class="btn btn-xs btn-success">
-                            <i class="ace-icon fa fa-check bigger-120"></i>
-                        </button>
-
-                        <button class="btn btn-xs btn-info">
+                        <button v-on:click="edit(chapter)" class="btn btn-xs btn-info">
                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                         </button>
 
-                        <button class="btn btn-xs btn-danger">
+                        <button v-on:click="del(chapter.id)" class="btn btn-xs btn-danger">
                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                        </button>
-
-                        <button class="btn btn-xs btn-warning">
-                            <i class="ace-icon fa fa-flag bigger-120"></i>
                         </button>
                     </div>
 
@@ -86,7 +78,7 @@
             </tbody>
         </table>
 
-        <div class="modal fade" tabindex="-1" role="dialog">
+        <div id="form-modal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -126,8 +118,8 @@
         name: 'chapter',
         data: function(){
           return {
-              chapters: [],
-              chapter:{}
+              chapter:{},
+              chapters: []
           }
         },
         mounted: function(){
@@ -138,8 +130,14 @@
         },
         methods: {
             add(){
-                // let _this = this;
-                $(".modal").modal('show');
+                let _this = this;
+                _this.chapter = {};
+                $("#form-modal").modal('show');
+            },
+            edit(chapter){
+                let _this = this;
+                _this.chapter = $.extend({},chapter);
+                $("#form-modal").modal('show');
             },
             list(page){
                 let _this = this;
@@ -148,8 +146,9 @@
                     size:_this.$refs.pagination.size
                 }).then((response)=>{
                     console.log('查询大章列表结果：',response)
-                    _this.chapters = response.data.list;
-                    _this.$refs.pagination.render(page,response.data.total)
+                    let resp = response.data;
+                    _this.chapters = resp.content.list;
+                    _this.$refs.pagination.render(page,resp.content.total)
                 });
             },
             save(){
@@ -157,6 +156,21 @@
                 _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save',
                     _this.chapter).then((response)=>{
                     console.log('保存大章信息：',response)
+                    let resp = response.data;
+                    if (resp.success) {
+                        $("#form-modal").modal('hide');
+                        _this.list(1);
+                    }
+                })
+            },
+            del(id){
+                let _this = this;
+                _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/'+id).then((response)=>{
+                    console.log('删除大章信息：',response)
+                    let resp = response.data;
+                    if (resp.success) {
+                        _this.list(1);
+                    }
                 })
             }
         }
