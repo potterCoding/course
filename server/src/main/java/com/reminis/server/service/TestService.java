@@ -1,6 +1,7 @@
 package com.reminis.server.service;
 
 import com.reminis.server.domain.Test;
+import com.reminis.server.domain.TestExample;
 import com.reminis.server.mapper.TestMapper;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,10 @@ public class TestService {
     private TestMapper testMapper;
 
     public List<Test> list() {
-        return testMapper.selectByExample(null);
+        TestExample example = new TestExample();
+        example.createCriteria().andIdEqualTo("1");
+        example.setOrderByClause("id desc");
+        return testMapper.selectByExample(example);
     }
 
 }
