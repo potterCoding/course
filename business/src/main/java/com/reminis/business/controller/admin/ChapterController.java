@@ -10,14 +10,14 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admin/chapter")
 public class ChapterController {
 
     @Resource
     private ChapterService chapterService;
 
-    @GetMapping("/chapter")
-    public List<ChapterDto> chapter() {
+    @GetMapping("/list")
+    public List<ChapterDto> list() {
         return chapterService.list();
     }
 
