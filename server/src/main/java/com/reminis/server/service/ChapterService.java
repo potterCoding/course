@@ -7,6 +7,7 @@ import com.reminis.server.domain.ChapterExample;
 import com.reminis.server.dto.ChapterDto;
 import com.reminis.server.dto.PageDto;
 import com.reminis.server.mapper.ChapterMapper;
+import com.reminis.server.util.UuidUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -37,4 +38,10 @@ public class ChapterService {
         pageDto.setList(chapterDtoList);
     }
 
+    public void save(ChapterDto chapterDto) {
+        chapterDto.setId(UuidUtil.getShortUuid());
+        Chapter chapter = new Chapter();
+        BeanUtils.copyProperties(chapterDto,chapter);
+        chapterMapper.insert(chapter);
+    }
 }
