@@ -1,5 +1,6 @@
 package com.reminis.server.service;
 
+import com.github.pagehelper.PageHelper;
 import com.reminis.server.domain.Chapter;
 import com.reminis.server.domain.ChapterExample;
 import com.reminis.server.dto.ChapterDto;
@@ -18,6 +19,7 @@ public class ChapterService {
     private ChapterMapper chapterMapper;
 
     public List<ChapterDto> list() {
+        PageHelper.startPage(1,1);
         ChapterExample example = new ChapterExample();
         List<Chapter> chapters = chapterMapper.selectByExample(example);
         List<ChapterDto> chapterDtoList = new ArrayList<>(chapters.size());
