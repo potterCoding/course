@@ -11,14 +11,19 @@ public class ServerGenerator {
 
     private static String toServicePath = "server\\src\\main\\java\\com\\reminis\\server\\service\\";
 
+    private static String toControllerPath = "business\\src\\main\\java\\com\\reminis\\business\\controller\\admin\\";
+
     public static void main(String[] args) throws IOException, TemplateException {
         String Domain = "Section";
         String domain = "section";
         Map<String,Object> map = new HashMap<>();
         map.put("Domain",Domain);
         map.put("domain",domain);
-
+        // 生成service
         FreemarkerUtil.initConfig("service.ftl");
         FreemarkerUtil.generator(toServicePath + Domain +"Service.java",map);
+        // 生成controller
+        FreemarkerUtil.initConfig("controller.ftl");
+        FreemarkerUtil.generator(toControllerPath + Domain +"Controller.java",map);
     }
 }
