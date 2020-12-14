@@ -17,76 +17,76 @@
         <table id="simple-table" class="table  table-bordered table-hover">
             <thead>
             <tr>
-                <th>id</th>
-                <th>标题</th>
-                <th>课程</th>
-                <th>大章</th>
-                <th>视频</th>
-                <th>时长</th>
-                <th>收费</th>
-                <th>顺序</th>
-                <th>创建时间</th>
-                <th>修改时间</th>
+                                    <th>id</th>
+                    <th>标题</th>
+                    <th>课程</th>
+                    <th>大章</th>
+                    <th>视频</th>
+                    <th>时长</th>
+                    <th>收费</th>
+                    <th>顺序</th>
+                    <th>创建时间</th>
+                    <th>修改时间</th>
                 <th>操作</th>
             </tr>
             </thead>
 
             <tbody>
             <tr v-for="section in sections">
-               <td>{{section.id}}</td>
-               <td>{{section.title}}</td>
-               <td>{{section.courseId}}</td>
-               <td>{{section.chapterId}}</td>
-               <td>{{section.video}}</td>
-               <td>{{section.time}}</td>
-               <td>{{section.charge}}</td>
-               <td>{{section.sort}}</td>
-               <td>{{section.createdAt}}</td>
-               <td>{{section.updatedAt}}</td>
+                   <td>{{section.id}}</td>
+                   <td>{{section.title}}</td>
+                   <td>{{section.courseId}}</td>
+                   <td>{{section.chapterId}}</td>
+                   <td>{{section.video}}</td>
+                   <td>{{section.time}}</td>
+                   <td>{{section.charge}}</td>
+                   <td>{{section.sort}}</td>
+                   <td>{{section.createdAt}}</td>
+                   <td>{{section.updatedAt}}</td>
                 <td>
-                <div class="hidden-sm hidden-xs btn-group">
-                    <button v-on:click="edit(section)" class="btn btn-xs btn-info">
-                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                    </button>
-
-                    <button v-on:click="del(section.id)" class="btn btn-xs btn-danger">
-                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                    </button>
-                </div>
-
-                <div class="hidden-md hidden-lg">
-                    <div class="inline pos-rel">
-                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-                            <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                    <div class="hidden-sm hidden-xs btn-group">
+                        <button v-on:click="edit(section)" class="btn btn-xs btn-info">
+                            <i class="ace-icon fa fa-pencil bigger-120"></i>
                         </button>
 
-                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                            <li>
-                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                <span class="blue">
-                                                                    <i class="ace-icon fa fa-search-plus bigger-120"></i>
-                                                                </span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                <span class="green">
-                                                                    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                                                </span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                <span class="red">
-                                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                                </span>
-                                </a>
-                            </li>
-                        </ul>
+                        <button v-on:click="del(section.id)" class="btn btn-xs btn-danger">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                        </button>
                     </div>
-                </div>
+
+                    <div class="hidden-md hidden-lg">
+                        <div class="inline pos-rel">
+                            <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                <li>
+                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                    <span class="blue">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                                    </span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                    <span class="green">
+                                                                        <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                                    </span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                    <span class="red">
+                                                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                                    </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </td>
             </tr>
             </tbody>
@@ -218,6 +218,13 @@
             save(){
                 let _this = this;
                 // 保存校验
+                if (1 != 1
+                    || !Validator.require(_this.section.title, "标题")
+                    || !Validator.length(_this.section.title, "标题", 1, 50)
+                    || !Validator.length(_this.section.video, "视频", 1, 200)
+                ) {
+                    return;
+                }
 
                 Loading.show();
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/section/save',
