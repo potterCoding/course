@@ -1,4 +1,4 @@
-package com.reminis.business.controller.admin;
+package com.reminis.${module}.controller.admin;
 
 import com.reminis.server.domain.${Domain};
 import com.reminis.server.dto.${Domain}Dto;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @RequestMapping("/admin/${domain}")
 public class ${Domain}Controller {
     private static final Logger LOG = LoggerFactory.getLogger(${Domain}Controller.class);
-    private static final String BUSINESS_NAME = "大章";
+    private static final String BUSINESS_NAME = "${tableNameCn}";
 
     @Resource
     private ${Domain}Service ${domain}Service;
