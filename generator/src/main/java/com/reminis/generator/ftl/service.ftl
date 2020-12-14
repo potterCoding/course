@@ -29,13 +29,13 @@ public class ${Domain}Service {
      */
     public void list(PageDto pageDto) {
         PageHelper.startPage(pageDto.getPage(),pageDto.getSize());
-        ${Domain}Example example = new ${Domain}Example();
+        ${Domain}Example ${domain}example = new ${Domain}Example();
         <#list fieldList as field>
             <#if field.nameHump=='sort'>
         ${domain}Example.setOrderByClause("sort asc");
             </#if>
         </#list>
-        List<${Domain}> ${domain}s = ${domain}Mapper.selectByExample(example);
+        List<${Domain}> ${domain}s = ${domain}Mapper.selectByExample(${domain}example);
         PageInfo<${Domain}> pageInfo = new PageInfo<>(${domain}s);
         pageDto.setTotal(pageInfo.getTotal());
 
